@@ -59,10 +59,10 @@ class Storage(StorageAbstract):
             time.sleep(1)
 
     def _generate_public_key(self):
-        index_key = str(uuid.uuid4())
+        public_key = str(uuid.uuid4())
         for _ in range(20):
-            if index_key not in self.__passwords:
-                return index_key
+            if public_key not in self.__passwords:
+                return public_key
         else:
             IndexError("Failed to generate index")
 
@@ -110,6 +110,3 @@ class Storage(StorageAbstract):
         cipher_password = self.__passwords.pop(public_key)['password']
 
         return cipher.decrypt(cipher_password).decode()
-
-
-
