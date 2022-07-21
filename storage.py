@@ -41,7 +41,7 @@ class Storage(StorageAbstract):
 
     @staticmethod
     def _sync_threads(func):
-        # Декоратор для работы в разных потоках с одним экземпляром класса
+        # A decorator for working in different threads with a single instance of the class
 
         def wrapper(*args, **kwargs):
             self = args[0]
