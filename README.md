@@ -10,10 +10,10 @@ Use command *pip3 install --upgrade cryptography* to install Python package
 If pip3 are not installed: sudo apt-install python3-pip
 
 # Example
-  <code>
-    storage = PasswordStorage()
-    password = "Password1234"
-    public_key, private_key = storage.save(password, 86400)
-    original_password = storage.get(public_key, private_key)
-    print(original_password)
-  </code>
+<code>
+storage = PasswordStorage()
+password = "Password1234"
+public_key, private_key = storage.save(password, 86400)
+original_password = storage.get(public_key, private_key)
+print(original_password)
+</code>
