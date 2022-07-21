@@ -3,6 +3,7 @@
 The class was created for the secure transmission of information, for example, passwords. It can be integrated into telegram bot, api, web, etc.
 
 <h2> Requirements </h2>
+
 - cryptography
 
 Use command *pip3 install --upgrade cryptography* to install Python package
