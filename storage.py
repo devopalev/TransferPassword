@@ -62,7 +62,7 @@ class Storage(StorageAbstract):
             if public_key not in self.__passwords:
                 return public_key
         else:
-            IndexError("Failed to generate index")
+            raise IndexError("Failed to generate index")
 
     @_sync_threads
     def save(self, password: str, timeout_second: int, public_key: str = None) -> tuple:
