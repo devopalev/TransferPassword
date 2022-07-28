@@ -7,12 +7,12 @@ from cryptography.fernet import Fernet
 
 class StorageAbstract(ABC):
     @abstractmethod
-    def save(self, password: str, key: str = None):
+    def save(self):
         # save password
         ...
 
     @abstractmethod
-    def get(self, key: str) -> str:
+    def get(self) -> str:
         # get password
         ...
 
