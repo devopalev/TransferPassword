@@ -2,22 +2,12 @@ import time
 import threading
 import uuid
 from abc import ABC, abstractmethod
+
+import self as self
 from cryptography.fernet import Fernet
 
 
-class StorageAbstract(ABC):
-    @abstractmethod
-    def save(self):
-        # save password
-        ...
-
-    @abstractmethod
-    def get(self) -> str:
-        # get password
-        ...
-
-
-class Storage(StorageAbstract):
+class Storage:
     """
     Thread-safe password storage. Designed to securely transfer passwords to users.
     Passwords are stored encrypted.
@@ -92,19 +82,23 @@ class Storage(StorageAbstract):
         return public_key, cipher_key.decode()
 
     @_sync_threads
-    def get(self, public_key: str, private_key: str) -> str:
+    def get(self, public_key: str, private_key: str):
         """
         :param public_key: the key returned in the save method
         :param private_key: the key returned in the save method
         :return: password
         """
 
-        assert isinstance(private_key, str), "private_key must be str"
         if public_key not in self.__passwords:
-            raise KeyError("public_key not found")
+            raise KeyError("Public key not found")
 
-        cipher_key = private_key.encode()
-        cipher = Fernet(key=cipher_key)
-        cipher_password = self.__passwords.pop(public_key)['password']
+        try:
+            cipher_key = private_key.encode()
+            cipher = Fernet(key=cipher_key)
+            cipher_password = self.__passwords.pop(public_key)['password']
+            return cipher.decrypt(cipher_password).decode()
+        except:
+            raise KeyError("Bad private code")
 
-        return cipher.decrypt(cipher_password).decode()
+    def check_public_key(self, public_key):
+        return public_key in self.__passwords

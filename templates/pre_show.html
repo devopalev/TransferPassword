@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="/show/{{public_key}}" method="post">
+    <label for="private_key"><b>Введите приватный ключ</b></label>
+    <textarea id="private_key" name="private_key" placeholder="Write something.." ></textarea>
+    <input type="submit" value="Отправить">
+</form>
+{% endblock %}
